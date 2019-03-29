@@ -28,9 +28,13 @@ def username(bot, update):
 def password(bot, update):
     user_pass = update.message.text.lower()
     global user_spotify
-    user_spotify = Spotify(user_nick, user_pass)
-    bot.sendMessage(chat_id=update.message.chat_id, text="It worked! \U0001F389 Now use /lyrics for me to sing \U0001F525\U0001F602\U0001F44C")
+    try:
+        user_spotify = Spotify(user_nick, user_pass)
+        bot.sendMessage(chat_id=update.message.chat_id, text="It worked! \U0001F389 Now use /lyrics for me to sing \U0001F525\U0001F602\U0001F44C")
+    except:
+        bot.sendMessage(chat_id=update.message.chat_id, text="Bad credentials, I couldn't connect.")
     return -1
+
 
 @run_async
 def cancel(bot, update):
